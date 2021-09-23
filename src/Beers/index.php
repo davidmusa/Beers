@@ -31,7 +31,11 @@
 
 <script>
 
-    function joke_request();
+    function joke_request(){
+
+        var word_input = document.getElementById("input_word").value;
+        console.log(word_input);
+    }
         
 
 </script>
