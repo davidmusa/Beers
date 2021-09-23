@@ -18,7 +18,7 @@
 
     <link rel="stylesheet" href="styles.css">
 
-    <title>Document</title>
+    <title>Jokes For You</title>
 </head>
 <body>
     <div id=inside_container>
@@ -34,9 +34,47 @@
     function joke_request(){
 
         var word_input = document.getElementById("input_word").value;
-        console.log(word_input);
-    }
-        
+        var endpoint = "https://v2.jokeapi.dev/joke/pun";
+        var request_endpoint = endpoint + "?contains=" + input_word;
+
+        var output = "";
+
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                output = JSON.parse(xhttp.responseText);
+
+                var number_of_jokes = output.length
+                document.getElementById("output_container").innerHTML = "There is " + number_of_jokes + " jokes found!";
+
+            for (var i = 0; i < number_of_jokes; i++) {
+                var setup = output[i]['setup'];
+                var delivery = output[i]['delivery'];
+                var joke = output[i]['joke'];
+                
+                var output_html = "<div class='joke_table'>" + setup + " > " + delivery + " > " + joke + "</div><br><br>";
+
+                var number_of_joke = joke.length;
+                var jokes_found = "";
+                for (var j = 0; j < number_of_joke; j++) {
+                    jokes_found = joke[j];
+                    output_html += jokes_found + "<br><br>";
+                }
+
+                var currentHTML = document.getElementById("output_container").innerHTML;
+                currentHTML += output_html;
+
+                document.getElementById("output_container").innerHTML = currentHTML;
+
+            }
+
+        }
+    };
+
+    xhttp.open("GET", requested_enpoint, true);
+    xhttp.send();
+
+    }    
 
 </script>
 
