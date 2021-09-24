@@ -33,7 +33,7 @@
             function joke_request() {
 
                 var word_input = document.getElementById("input_word").value;
-                var endpoint = "https://v2.jokeapi.dev/joke/pun";
+                var endpoint = "https://v2.jokeapi.dev/joke/any";
                 var requested_endpoint = endpoint + "?contains=" + word_input;
 
                 var output = "";
@@ -52,6 +52,7 @@
                         var joke = output[i]['joke'];
                         
                         var output_html = "<div class='joke_table'>" + setup + " > " + delivery + "</div><br><br>";
+                        output_html += output[i];
 
                         var number_of_joke = joke.length;
                         var jokes_found = "";
